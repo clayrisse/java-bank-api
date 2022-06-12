@@ -1,9 +1,9 @@
 package com.project.bankapi.repository;
 
-import com.project.bankapi.model.cAccount.CredictCardAc;
+import com.project.bankapi.model.cAccount.CreditCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CreditCardAcRepository extends JpaRepository<CredictCardAc, Long> {
+public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
 }

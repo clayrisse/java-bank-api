@@ -1,12 +1,12 @@
 package com.project.bankapi.service.impl;
 
 import com.project.bankapi.repository.*;
-import com.project.bankapi.service.IAdminService;
+import com.project.bankapi.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminService implements IAdminService {
+public class AccountService implements IAccountService {
 
     @Autowired    AccountHolderRepository accountHolderRepository;
     @Autowired    AdminRepository adminRepository;
@@ -17,6 +17,4 @@ public class AdminService implements IAdminService {
     @Autowired    ThirdPartyRepository thirdPartyRepository;
     @Autowired    AccountRepository accountRepository;
     @Autowired    ProductRepository productRepository;
-
-
 }

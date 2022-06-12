@@ -14,9 +14,11 @@ public class AdminController implements IAdminController {
     @Autowired    AdminService adminService;
     @Autowired    CheckingAcService checkingAcService;
     @Autowired    CheckStudentAcService checkStudentAcService;
-    @Autowired    CredictCardAcService credictCardAcService;
+    @Autowired    CreditCardService creditCardService;
     @Autowired    SavingsAcService service;
     @Autowired    ThirdPartyService thirdPartyService;
+    @Autowired    AccountService accountService;
+    @Autowired    ProductService productService;
 
 
 }

@@ -1,12 +1,12 @@
 package com.project.bankapi.service.impl;
 
 import com.project.bankapi.repository.*;
-import com.project.bankapi.service.IAdminService;
+import com.project.bankapi.service.ICreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminService implements IAdminService {
+public class CreditCardService implements ICreditCardService {
 
     @Autowired    AccountHolderRepository accountHolderRepository;
     @Autowired    AdminRepository adminRepository;

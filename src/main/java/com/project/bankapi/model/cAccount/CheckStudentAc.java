@@ -1,12 +1,12 @@
 package com.project.bankapi.model.cAccount;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-//@PrimaryKeyJoinColumn(name = "idStudent")
-public class CheckStudentAc extends Account{
+@PrimaryKeyJoinColumn(name = "studentId")
+public class CheckStudentAc extends Account {
 
-    private String privateKey;
-
+//        NO  minimumBalance
+//        NO monthlyMaintenanceFee
 
 }

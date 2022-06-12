@@ -1,6 +1,6 @@
 package com.project.bankapi.model.cUser;
 
-import com.project.bankapi.model.cAccount.Account;
+import com.project.bankapi.model.cAccount.Product;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +21,7 @@ public class AccountHolder extends User{
     })
     private Address mailAddress;
 
-//    private List<Account> accountList;
+//    @OneToMany
+//    private List<Product> productsList;
 
 }

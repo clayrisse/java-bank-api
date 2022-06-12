@@ -1,27 +1,18 @@
 package com.project.bankapi.model.cAccount;
 
-import com.project.bankapi.model.cUser.AccountHolder;
+import com.project.bankapi.enums.Status;
 
 import javax.persistence.*;
+import java.util.Date;
 
-//@Entity
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//public class Account {
-@MappedSuperclass
-public abstract class Account {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@PrimaryKeyJoinColumn(name = "accountId")
+public class Account extends Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-//    private String owner1;
-//    @ManyToOne
-//    @JoinColumn(name = "owner_1_id")
-//    private AccountHolder owner1;
-    private String owner2;
-    private long balance; //--- if balance < minbalance -->balance-penaltyFee
-    public static int penaltyFee; // = 40
-    public static long accountNumGenerator;
-
-
+    private String secretKey;
+    private Date creationDate;
+    private Status status;
+    private int minimumBalance;
+    private int monthlyMaintenanceFee;
 }
