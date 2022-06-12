@@ -1,6 +1,9 @@
 package com.project.bankapi.model.cAccount;
 
+import com.project.bankapi.model.cUser.AccountHolder;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -10,11 +13,6 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-//    @ManyToOne
-//    @JoinColumn(name = "owner_1_id")
-//    private AccountHolder owner1;
-//    private String owner1;
-    private String owner2;
     @Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "currency", column = @Column(name = "bal_currency")),
@@ -25,5 +23,17 @@ public class Product {
     public static long accountNumGenerator;
 
 
+    @ManyToOne
+    @JoinColumn(name = "owner_1_id")
+    private AccountHolder owner1;
+//    private AccountHolder owner2;
+
+    @ManyToMany
+    @JoinTable(
+            name = "accounts_owners",
+            joinColumns = {@JoinColumn(name = "productId")},
+            inverseJoinColumns = {@JoinColumn(name = "ownersId")}
+    )
+    private Set<AccountHolder> owners;
 
 }

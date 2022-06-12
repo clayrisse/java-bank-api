@@ -12,6 +12,7 @@ public class Account extends Product {
 
     private String secretKey;
     private Date creationDate;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private int minimumBalance;
     private int monthlyMaintenanceFee;

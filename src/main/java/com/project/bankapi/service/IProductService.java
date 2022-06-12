@@ -1,4 +1,4 @@
 package com.project.bankapi.service;
 
-public class IProductService {
+public interface IProductService {
 }

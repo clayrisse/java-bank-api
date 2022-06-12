@@ -21,7 +21,10 @@ public class AccountHolder extends User{
     })
     private Address mailAddress;
 
-//    @OneToMany
-//    private List<Product> productsList;
+    @ManyToMany(mappedBy = "owners")
+    private List<Product> productsList;
+
+    @OneToMany(mappedBy = "owner1")
+    private List<Product> productsList1;
 
 }
