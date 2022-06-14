@@ -1,6 +1,6 @@
 package com.project.bankapi.repository;
 
-import com.project.bankapi.model.cAccount.CheckStudentAc;
+import com.project.bankapi.model.mProduct.CheckStudentAc;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

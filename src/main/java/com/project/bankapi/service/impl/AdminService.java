@@ -1,7 +1,7 @@
 package com.project.bankapi.service.impl;
 
 import com.project.bankapi.repository.*;
-import com.project.bankapi.service.IAdminService;
+import com.project.bankapi.service.i.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,7 @@ public class AdminService implements IAdminService {
     @Autowired    ThirdPartyRepository thirdPartyRepository;
     @Autowired    AccountRepository accountRepository;
     @Autowired    ProductRepository productRepository;
+    @Autowired    UserRepository userRepository;
 
 
 }
