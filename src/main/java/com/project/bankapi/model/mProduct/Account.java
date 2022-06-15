@@ -26,6 +26,11 @@ public class Account extends Product {
 
     public Account() {}
 
+    public Account(int minimumBalance, int monthlyMaintenanceFee) {
+        this.minimumBalance = minimumBalance;
+        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
+    }
+
     //constructor para checkingAc
     public Account(BigDecimal balance, AccountHolder firstowner, int minimumBalance, int monthlyMaintenanceFee) {
         super(balance, firstowner);
@@ -59,6 +64,7 @@ public class Account extends Product {
         this.creationDate = new Date();
         this.status = Status.ACTIVE;
     }
+
 
     public String getSecretKey() { return secretKey; }
     public void setSecretKey(String secretKey) {

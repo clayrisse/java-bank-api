@@ -18,7 +18,9 @@ public class CheckingAc extends Account{
     private static int checkingMinBalance = 250;
     private static int checkingMonthMaintenanceFee = 12;
 
-    public CheckingAc() {}
+    public CheckingAc() {
+        super(checkingMinBalance, checkingMonthMaintenanceFee);
+    }
 
     public CheckingAc(BigDecimal balance, AccountHolder firstowner) {
         super(checkMinBalanceOpening(balance), firstowner, checkingMinBalance, checkingMonthMaintenanceFee);
@@ -28,6 +30,9 @@ public class CheckingAc extends Account{
         super(checkMinBalanceOpening(balance), firstowner, secondowner, checkingMinBalance, checkingMonthMaintenanceFee);
     }
 
+    public CheckingAc(BigDecimal balance, AccountHolder firstowner, AccountHolder secondowner, int minimumBalance, int monthlyMaintenanceFee) {
+        super(balance, firstowner, secondowner, minimumBalance, monthlyMaintenanceFee);
+    }
 
     public static BigDecimal checkMinBalanceOpening(BigDecimal balance){
         if (balance.intValue() < checkingMinBalance) {
@@ -42,6 +47,16 @@ public class CheckingAc extends Account{
 
     public static void setCheckingMinBalance(int checkingMinBalance) {
         CheckingAc.checkingMinBalance = checkingMinBalance;
+    }
+
+    @Override
+    public void setMinimumBalance(int minimumBalance) {
+        super.setMinimumBalance(minimumBalance);
+    }
+
+    @Override
+    public void setMonthlyMaintenanceFee(int monthlyMaintenanceFee) {
+        super.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
     }
 
     public static int getCheckingMonthMaintenanceFee() {
