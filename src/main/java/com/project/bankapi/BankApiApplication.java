@@ -28,7 +28,8 @@ public class BankApiApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = userRepository.save(new User("a", passwordEncoder.encode("a")));
+//		User user = userRepository.save(new User("a", passwordEncoder.encode("a")));
+		User user = userRepository.save(new User("a", "The God","a"));
 		System.err.println(user.getUsername());
 		user.setRole("ADMIN");
 
@@ -37,7 +38,7 @@ public class BankApiApplication implements CommandLineRunner {
 
 //		AccountHolder holder = accountHolderRepository.save(new AccountHolder("user1", "11111",
 //				new Address ()));
-		AccountHolder holder4 = accountHolderRepository.save(new AccountHolder("gbeegv","eererervg"));
+		AccountHolder holder4 = accountHolderRepository.save(new AccountHolder("h","Tester Account Holder", "h"));
 	}
 
 }

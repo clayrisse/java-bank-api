@@ -10,21 +10,20 @@ import java.math.BigDecimal;
 public class CheckStudentAc extends Account {
 
 
-    public CheckStudentAc() {
-    }
+    public CheckStudentAc() {}
+//
+//    public CheckStudentAc(BigDecimal balance, AccountHolder firstowner) {
+//        super(checkBalanceOpening(balance), firstowner);
+//    }
+//
+//    public CheckStudentAc(BigDecimal balance, AccountHolder firstowner, AccountHolder secondowner) {
+//        super(checkBalanceOpening(balance), firstowner, secondowner);
+//    }
 
-    public CheckStudentAc(BigDecimal balance, AccountHolder firstowner) {
-        super(checkBalanceOpening(balance), firstowner);
-    }
-
-    public CheckStudentAc(BigDecimal balance, AccountHolder firstowner, AccountHolder secondowner) {
-        super(checkBalanceOpening(balance), firstowner, secondowner);
-    }
-
-    public static BigDecimal checkBalanceOpening(BigDecimal balance) {
-        if (balance.intValue() < 0) {
-            throw new IllegalArgumentException("El balance es menor a 0");
-        }
-        return balance;
-    }
+//    public static BigDecimal checkBalanceOpening(BigDecimal balance) {
+//        if (balance.intValue() < 0) {
+//            throw new IllegalArgumentException("El balance es menor a 0");
+//        }
+//        return balance;
+//    }
 }

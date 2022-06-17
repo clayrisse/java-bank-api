@@ -1,5 +1,6 @@
 package com.project.bankapi.model.mProduct;
 
+import com.project.bankapi.model.mOperation.Operation;
 import com.project.bankapi.model.mUser.AccountHolder;
 
 import javax.persistence.*;
@@ -23,28 +24,22 @@ public class Product {
     private Money balance; //--- if balance < minbalance -->balance-penaltyFee
     public static int penaltyFee = 40;
 
-
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "firstownerId")
     private AccountHolder firstowner;
 
-
     @ManyToOne
-    @JoinColumn(name = "secondownerId")
+    @JoinColumn(name = "secondownerId") // cascade = CascadeType.ALL
     private AccountHolder secondowner;
 
-    //todo esto es para ver como es mejor resolverlo???
-    //jose te dara como hacer una tercera column para agregar otro link
-//    @ManyToMany
-//    @JoinTable(
-//            name = "accounts_owners",
-//            joinColumns = {@JoinColumn(name = "productId")},
-//            inverseJoinColumns = {@JoinColumn(name = "ownersId"),
-//            }
-//    )
-//    private Set<AccountHolder> owners;
+    @OneToMany(mappedBy = "productOwner")
+    private List<Operation> operationList;
 
     public Product() {}
+
+    public Product(Money balance) {
+        this.balance = balance;
+    }
 
     public Product(BigDecimal balance, AccountHolder firstowner) {
         this.balance = new Money (balance);
@@ -60,7 +55,6 @@ public class Product {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -69,11 +63,9 @@ public class Product {
         return balance;
     }
     public void setBalance(Money balance) {
-//        if (balance.getAmount()-)
         this.balance = balance;
     }
     public void setBalance(BigDecimal balance) {
-//        if (balance-this.)
             this.balance = new Money(balance);
     }
 

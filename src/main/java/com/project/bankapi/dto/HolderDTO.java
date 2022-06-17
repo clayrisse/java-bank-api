@@ -1,10 +1,12 @@
 package com.project.bankapi.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class HolderDTO {
     private String username;
     private String password;
+    private String fullName;
     private String street;
     private String zipcode;
     private String city;
@@ -14,16 +16,19 @@ public class HolderDTO {
     private String cityMail;
     private String countryMail;
 
-    private Date birthDate;
+    private LocalDate birthDate;
 
 
     public HolderDTO(String username
-                    , String password, String street, String zipcode, String city, String country
+                    , String password
+                    , String fullName
+                    , String street, String zipcode, String city, String country
                     , String streetMail, String zipcodeMail, String cityMail, String countryMail
-//                    , Date birthDate
+                    , LocalDate birthDate
     ) {
         this.username = username;
         this.password = password;
+        this.fullName = fullName;
         this.street = street;
         this.zipcode = zipcode;
         this.city = city;
@@ -32,7 +37,8 @@ public class HolderDTO {
         this.zipcodeMail = zipcodeMail;
         this.cityMail = cityMail;
         this.countryMail = countryMail;
-//        this.birthDate = birthDate;
+        this.birthDate = birthDate;
+
     }
 
     public String getUsername() { return username; }
@@ -40,6 +46,9 @@ public class HolderDTO {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
     public String getStreet() { return street; }
     public void setStreet(String street) { this.street = street; }
@@ -65,6 +74,6 @@ public class HolderDTO {
     public String getCountryMail() { return countryMail; }
     public void setCountryMail(String countryMail) { this.countryMail = countryMail; }
 
-    public Date getBirthDate() { return birthDate; }
-    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
+    public LocalDate getBirthDate() { return birthDate; }
+    public void setBirthDate(LocalDate birthDate) { this.birthDate = birthDate; }
 }

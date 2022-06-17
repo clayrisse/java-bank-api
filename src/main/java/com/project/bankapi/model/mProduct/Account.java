@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ import java.util.Date;
 public class Account extends Product {
 
     private String secretKey;
-    private Date creationDate;
+    private LocalDate creationDay;
     @Enumerated(EnumType.STRING)
     private Status status;
     private int minimumBalance = 0;
@@ -24,45 +25,55 @@ public class Account extends Product {
     private static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-    public Account() {}
+    public Account() {
+        this.secretKey = passwordEncoder.encode(defaultSecretKey);
+        this.status = Status.ACTIVE;
+        this.creationDay = LocalDate.now();
+    }
 
     public Account(int minimumBalance, int monthlyMaintenanceFee) {
         this.minimumBalance = minimumBalance;
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
+        this.secretKey = passwordEncoder.encode(defaultSecretKey);
+        this.status = Status.ACTIVE;
+        this.creationDay = LocalDate.now();
     }
 
-    //constructor para checkingAc
-    public Account(BigDecimal balance, AccountHolder firstowner, int minimumBalance, int monthlyMaintenanceFee) {
-        super(balance, firstowner);
+    public Account(int minimumBalance) {
         this.minimumBalance = minimumBalance;
-        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.secretKey = passwordEncoder.encode(defaultSecretKey);
-        this.creationDate = new Date();
         this.status = Status.ACTIVE;
-    }
-    //constructor para checkingAc   con secondOwner
-    public Account(BigDecimal balance, AccountHolder firstowner, AccountHolder secondowner, int minimumBalance, int monthlyMaintenanceFee) {
-        super(balance, firstowner, secondowner);
-        this.minimumBalance = minimumBalance;
-        this.monthlyMaintenanceFee = monthlyMaintenanceFee;
-        this.secretKey = passwordEncoder.encode(defaultSecretKey);
-        this.creationDate = new Date();
-        this.status = Status.ACTIVE;
+        this.creationDay = LocalDate.now();
     }
 
-    //constructor para checkingSTUDENTAc
-    public Account(BigDecimal balance, AccountHolder firstowner) {
-        super(balance, firstowner);
-        this.secretKey = passwordEncoder.encode(defaultSecretKey);
-        this.creationDate = new Date();
-        this.status = Status.ACTIVE;
+    @Override
+//    public void setBalance(BigDecimal balance) {
+    public void setBalance(Money balance) {
+        if (balance.getAmount().intValue() < minimumBalance) {
+            balance.decreaseAmount(new BigDecimal(Product.getPenaltyFee()));
+            super.setBalance(balance);
+            System.err.println("Se ha aplicado una penalización de 40 por balance menor al limite");
+            throw new IllegalArgumentException("El balance total es menor al saldo mínimo de la cuenta");
+        }
+        super.setBalance(balance);
     }
-    //constructor para checkingSTUDENTAc  con secondOwner
-    public Account(BigDecimal balance, AccountHolder firstowner, AccountHolder secondowner) {
-        super(balance, firstowner, secondowner);
-        this.secretKey = passwordEncoder.encode(defaultSecretKey);
-        this.creationDate = new Date();
-        this.status = Status.ACTIVE;
+
+//
+//    public BigDecimal decreaseAmount(Money money) {
+//        setAmount(this.amount.subtract(money.getAmount()));
+//        return this.amount;
+//    }
+//
+//    public BigDecimal decreaseAmount(BigDecimal addAmount) {
+//        setAmount(this.amount.subtract(addAmount));
+//        return this.amount;
+//    }
+
+    public void setFirstBalance(BigDecimal balance) {
+        if (balance.intValue() < minimumBalance) {
+            throw new IllegalArgumentException("El balance total es menor al saldo mínimo de la cuenta");
+        }
+        super.setBalance(new Money(balance));
     }
 
 
@@ -71,8 +82,8 @@ public class Account extends Product {
         this.secretKey = passwordEncoder.encode(secretKey);
     }
 
-    public Date getCreationDate() { return creationDate; }
-    public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
+    public LocalDate getCreationDay() { return creationDay; }
+    public void setCreationDay(LocalDate creationDay) { this.creationDay = creationDay; }
 
     public Status getStatus() { return status; }
     public void setStatus(Status status) { this.status = status; }
@@ -85,4 +96,5 @@ public class Account extends Product {
 
     public static String getDefaultSecretKey() {  return defaultSecretKey; }
     public static void setDefaultSecretKey(String defaultSecretKey) { Account.defaultSecretKey = defaultSecretKey; }
+
 }
